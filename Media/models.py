@@ -90,7 +90,7 @@ class PostImage(models.Model):
     )
 
 
-class Coment(models.Model):
+class Comment(models.Model):
     authors = models.ForeignKey(
         get_user_model(), on_delete=models.CASCADE, related_name="comments"
     )
