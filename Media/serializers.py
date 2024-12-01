@@ -15,13 +15,13 @@ def get_full_url(url: str) -> str:
     return f"{settings.BASE_URL}{url}"
 
 
-class HashtagSerializer(serializers.ModelSerializer):
+class HashTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = HashTag
         fields = ("id", "name")
 
 
-class HashtagListSerializer(serializers.ModelSerializer):
+class HashTagListSerializer(serializers.ModelSerializer):
     detail_url = serializers.SerializerMethodField()
 
     @staticmethod
@@ -35,7 +35,7 @@ class HashtagListSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    hashtags = HashtagSerializer(many=True, read_only=False, required=False)
+    hashtags = HashTagSerializer(many=True, read_only=False, required=False)
 
     class Meta:
         model = Post
@@ -156,7 +156,7 @@ class PostListSerializer(serializers.ModelSerializer):
         )
 
 
-class HashtagDetailSerializer(serializers.ModelSerializer):
+class HashTagDetailSerializer(serializers.ModelSerializer):
     posts = PostListSerializer(many=True, read_only=True)
 
     class Meta:
@@ -165,7 +165,7 @@ class HashtagDetailSerializer(serializers.ModelSerializer):
 
 
 class PostponedPostListSerializer(serializers.ModelSerializer):
-    hashtags = HashtagListSerializer(many=True, read_only=True)
+    hashtags = HashTagListSerializer(many=True, read_only=True)
     images = PostImageListSerializer(many=True, read_only=True)
     detail_url = serializers.SerializerMethodField()
 
@@ -189,7 +189,7 @@ class PostponedPostListSerializer(serializers.ModelSerializer):
 
 
 class PostponedPostDetailSerializer(PostSerializer):
-    hashtags = HashtagListSerializer(
+    hashtags = HashTagListSerializer(
         many=True, read_only=False, required=False
     )
     images = PostImageListSerializer(many=True, read_only=True)
@@ -252,7 +252,7 @@ class CommentCreateSerializer(serializers.ModelSerializer):
 class PostDetailSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(many=False)
     author_url = serializers.SerializerMethodField()
-    hashtags = HashtagListSerializer(many=True, read_only=True)
+    hashtags = HashTagListSerializer(many=True, read_only=True)
     num_likes = serializers.IntegerField()
     image_upload_url = serializers.SerializerMethodField()
     images = PostImageListSerializer(many=True, read_only=True)
