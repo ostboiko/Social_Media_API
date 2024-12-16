@@ -29,8 +29,8 @@ from social_media_api.views import ApiRootView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
-    path("api/user/", include("user.urls", namespace="user")),
-    path("api/feed/", include("feed.urls", namespace="feed")),
+    # path("api/user/", include("user.urls", namespace="user")),
+    path("api/Media/", include("Media.urls", namespace="feed")),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/doc/swagger/",
