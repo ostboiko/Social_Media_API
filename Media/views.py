@@ -1,4 +1,4 @@
-import mixins as mixins
+from rest_framework import mixins
 from django.contrib.auth import get_user_model
 from django.db.models import Prefetch, Count, Exists, OuterRef, QuerySet
 from django.http import HttpResponseRedirect
@@ -242,7 +242,7 @@ class PostViewSet(
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 
-class ImageDeleteView(generics.DestroyApiView):
+class ImageDeleteView(generics.DestroyAPIView):
     queryset = PostImage.objects.all()
     serializer_class = PostImageSerializer
     permission_classes = (IsPostAuthorUser,)
