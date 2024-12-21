@@ -19,6 +19,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+BASE_URL = 'http://localhost:8000'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -28,7 +29,7 @@ SECRET_KEY = 'django-insecure-nt$tp$&%xxgi&rsl%+^=u3uet%awo-z7negz8f4ga3f1gj8w5o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0"]
 
 
 # Application definition
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'drf_spectacular',
     'Media',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -127,6 +129,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = "user.User"
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -137,3 +141,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND")
+CELERY_TIMEZONE = "Europe/Lviv"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
