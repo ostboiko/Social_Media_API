@@ -3,5 +3,5 @@ venv
 **pycache__
 .idea
 db.sqlite3
-.env
 data
+.env
